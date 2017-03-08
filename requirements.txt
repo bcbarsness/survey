@@ -1,6 +1,4 @@
 alabaster==0.7.9
-anaconda-client==1.6.0
-anaconda-navigator==1.4.3
 appnope==0.1.0
 appscript==1.0.1
 astroid==1.4.9
@@ -33,6 +31,7 @@ dask==0.13.0
 datashape==0.5.4
 decorator==4.0.11
 dill==0.2.5
+dj-database-url==0.4.2
 Django==1.10.5
 docutils==0.13.1
 et-xmlfile==1.0.1
@@ -108,6 +107,7 @@ pyOpenSSL==16.2.0
 pyparsing==2.1.4
 pytest==3.0.5
 python-dateutil==2.6.0
+python-decouple==3.0
 pytz==2016.10
 PyYAML==3.12
 pyzmq==16.0.2
@@ -137,6 +137,7 @@ toolz==0.8.2
 tornado==4.4.2
 traitlets==4.3.2
 unicodecsv==0.14.1
+Unipath==1.1
 virtualenv==15.1.0
 wcwidth==0.1.7
 Werkzeug==0.11.15
