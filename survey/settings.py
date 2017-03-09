@@ -9,20 +9,10 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 
 import os
 import dj_database_url
-from decouple import Csv, config
-from unipath import Path
+from decouple import config
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
-from django.core.exceptions import ImproperlyConfigured
-
-def get_env_variable(var_name):
-    try:
-        return os.environ[var_name]
-    except KeyError:
-        error_msg = "Set the %s environment variable" % var_name
-        raise ImproperlyConfigured(error_msg)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
@@ -30,18 +20,12 @@ def get_env_variable(var_name):
 # SECURITY WARNING: keep the secret key used in production secret!
 
 SECRET_KEY = config('SECRET_KEY')
-#DEBUG = config('DEBUG', default=False, cast=bool)
-DATABASES = {
-    'default': dj_database_url.config(
-        default=config('DATABASE_URL')
-    )
-}
+
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
-
+#DEBUG = True
+DEBUG = config('DEBUG', default=False, cast=bool)
 
 # Application definition
 
@@ -90,13 +74,28 @@ WSGI_APPLICATION = 'survey.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
 
+DATABASES = {
+    'default': dj_database_url.config(
+        default=config('DATABASE_URL')
+    )
+}
+
+#from django.core.exceptions import ImproperlyConfigured
+#
+#def get_env_variable(var_name):
+#    try:
+#        return os.environ[var_name]
+#    except KeyError:
+#        error_msg = "Set the %s environment variable" % var_name
+#        raise ImproperlyConfigured(error_msg)
+
 #DATABASES = {
 #    'default': {
 #        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#        'NAME': 'djangopolls',
-#        'USER': 'django',
-#        'PASSWORD': 'ritvik@123',
-#        'HOST': '127.0.0.1',
+#        'NAME': get_env_variable('DATABASE_NAME'),
+#        'USER': get_env_variable('DATABASE_USER'),
+#        'PASSWORD': get_env_variable('DATABASE_PASSWORD'),
+#        'HOST': '',
 #        'PORT': '',
 #    }
 #}
@@ -133,11 +132,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
-# Parse database configuration from $DATABASE_URL
-import dj_database_url
-# comment the next line to use sqlite
-#DATABASES['default'] = dj_database_url.config()
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
